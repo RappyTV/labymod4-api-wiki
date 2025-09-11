@@ -45,7 +45,7 @@ public class ExampleIntegration implements LabyModProtocolIntegration {
 
 While not required if you are using the Integration by calling `LabyModProtocolService#getOrRegisterIntegration` (
 because the integration would be registered if not already), it is recommended to register the Integration as a service
-to automate the registering this process.
+to automate this process.
 
 #### Registering via AutoService
 
