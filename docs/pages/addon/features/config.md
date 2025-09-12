@@ -4,11 +4,12 @@ From using our predefined setting widgets over creating your own, to a few thing
 
 You can create your configuration by creating a new class and inheriting `AddonConfig`. This superclass requires you to implement the `enabled` method, as we want to allow servers to disable every addon they want. 
 
-The only thing you always need to keep in mind while creating a configuration besides the type you need to inherit is that you need to use the `ConfigProperty` type for your settings, but just for specific types that you might want to use. More on which types you can use by default <a href="#valid-setting-types">here</a>. For any other types, use the type itself without declaring it as an argument on `ConfigProperty`.
+The only thing you always need to keep in mind while creating a configuration besides the type you need to inherit is that you need to use the `ConfigProperty` type for your settings, but just for specific types that you might want to use. More on which types you can use by default [here](#setting-types). For any other types, use the type itself without declaring it as an argument on `ConfigProperty`.
 
 To create a setting that represents if your addon is enabled or not, you need to create a new field with the type `ConfigProperty`. Now add the type of your setting, in this case, `Boolean` as boolean. Now instantiate this property by declaring a new ConfigProperty with the default value as the argument, well use `true` as the default value.
 The result would look like this `ConfigProperty<Boolean> enabled = new ConfigProperty<>(true)`. Now, if we want to use this property in an event, we'll get the property (preferably by its getter) and call `get()`. This will get us the value of the property.
 
+### Setting types
 
 You can only use various types for your `ConfigProperty` by default. <br>
 The current valid types are:
@@ -98,12 +99,11 @@ Description:
 ## Further Customize the Settings
 
 In addition to using predefined widgets for your settings, you also have a few other options to customize them. <br>
-The following points are not very precisely explained, but you can see everything from the following subsections and most of the subsections before in
-<a href="#example-of-the-previous-sections">this section</a>.
+The following points are not very precisely explained, but you can see everything from the following subsections and most of the subsections before in [this section](#example-of-the-previous-sections).
 
 ### Create Sections
 
-You can create sections in your settings; you just have to add the annotation `@SettingSection` above the first field that you want to have in said section. Now all you have to do is set the identifier as the annotation's parameter and add it to your internationalization file. 
+You can create sections in your settings; you just have to add the annotation `@SettingSection` above the first field that you want to have in said section. Now all you have to do is set the identifier as the annotation's `value` parameter and add it to your internationalization file. You can also center the section title by passing the `center` annotation parameter as `true`.
 
 ### Create Sub Settings
 
@@ -113,7 +113,7 @@ If you want to display more than just the advanced button (the button that lets 
 
 ### Use Icons for Settings
 
-To display icons in front of your settings, you'll need to declare a sprite texture with the `@SpriteTexture` annotation. Set the name of your file as the value of the annotation (the base path is `assets/NAMESPACE/themes/THEME/textures/sprite`, while the namespace is the namespace you set in your `build.gradle.kts` and the theme to the current theme. If you want your icons to be visible in all themes, put the texture in the vanilla theme). More on sprite textures <a href="#FINAL_LINK_HERE">here</a>. 
+To display icons in front of your settings, you'll need to declare a sprite texture with the `@SpriteTexture` annotation. Set the name of your file as the value of the annotation (the base path is `assets/NAMESPACE/themes/THEME/textures/sprite`, while the namespace is the namespace you set in your `build.gradle.kts` and the theme to the current theme. If you want your icons to be visible in all themes, put the texture in the vanilla theme). More on sprite textures [here](#FINAL-LINK-HERE).
 
 ## Example of the Previous Sections
 
@@ -239,7 +239,7 @@ These are some example files showing a few of the functions mentioned before.
     ![Config-Result](../../../assets/files/screenshots/config-example.gif)
 
 ## Config Versioning
-If you want to push an update for your addon which breaks existing configs it would be a great idea to write a little config migrator class which converts the old json file to your new config format.
+If you want to push an update for your addon which breaks existing configs it would be a great idea to write a little config migrator class which converts the old JSON file to your new config format.
 The first step would be increasing the current version of your addon config by one. You do so by overriding the `AddonConfig#getConfigVersion` method in your config implementation.
 ```java
 @Override
@@ -262,7 +262,7 @@ public class ConfigVersionListener {
     // Check if it's really your config
     if (configClass == YourConfigClass.class) {
       if (usedVersion == 1) {
-        // The current config json object
+        // The current config JSON object
         JsonObject config = event.getJsonObject();
 
         // Keep the value of a renamed ConfigProperty
@@ -281,7 +281,7 @@ public class ConfigVersionListener {
         config.add("myNewArrayProperty", myNewArrayProperty);
 
         /*
-          You don't really have to remove old json values of removed ConfigProperties
+          You don't really have to remove old JSON values of removed ConfigProperties
           as they're removed when the config is being loaded anyway
         */
 

@@ -32,7 +32,7 @@ The `ChatReceiveEvent` is fired when a message is registered to be shown in chat
 
 The `GameTickEvent` is fired twice every tick. Once with the phase `PRE` and once with the phase `POST`. The phase represents the current state of a tick. If it has the phase `PRE`, it is fired before Minecraft registers the tick to all its different handlers; if it's the `POST` phase, it is fired after Minecraft itself handled the tick. A tick represents 50 milliseconds (20 ticks per second).
 
-### Json Config Loader Initialize Event
+### JSON Config Loader Initialize Event
 
 The `JsonConfigLoaderInitializeEvent` is fired when the configuration loader is initialized. This Event is used to create your own type adapters for your configuration.
 
