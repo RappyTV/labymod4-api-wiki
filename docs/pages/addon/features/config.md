@@ -33,68 +33,94 @@ The current valid types are:
 
 The following content lists all of our Setting Widgets that will be served by using the Addon API, with possible arguments (brackets surround optional arguments), compatible types, and a short description that you can create via an annotation:
 
-### Switch Widget
-
 Annotation: `SwitchSetting` <br>
 Arguments: none <br>
 Compatible Type: `Boolean` <br>
-Description: 
+Description: Allows the player to enable or disable an on/off switch.
 
 ### Slider Widget
 
 Annotation: `SliderSetting` <br>
 Arguments: `min` - smallest value possible, `max` - biggest value possible, (`steps` - the amount of how much the value will increase/decrease on each move - default is 1) <br>
 Compatible Types: `Integer`, `Float`, `Double`, `Short`, `Byte`, `Long` <br>
-Description: 
+Description: Allows a player to select a number between a specific range on a slider
 
 ### Text Field Widget
 
 Annotation: `TextFieldSetting` <br>
 Arguments: (`maxLength` - the maximal length of the string entered) <br>
 Compatible Type: `String` <br>
-Description: 
+Description: Allows the player to freely type any string
 
 ### Key Bind Widget
 
 Annotation: `KeyBindSetting` <br>
-Arguments: none <br>
+Arguments: (`acceptMouseButtons`: whether the user should be able to select mouse buttons - default is false) <br>
 Compatible Type: `Key` <br>
-Description: 
+Description: Allows the player to select a mouse or keyboard button
 
 ### Multi Key Bind Widget
 
 Annotation: `MultiKeyBindSetting` <br>
 Arguments: none <br>
 Compatible Type: `Key[]` <br>
-Description: 
+Description: Allows the player to select multiple keyboard buttons
 
 ### Color Picker Widget
 
 Annotation: `ColorPickerSetting` <br>
-Arguments: (`alpha` - whether the user should be able to change the transparency - default is false) <br>
+Arguments: (`alpha` - whether the user should be able to change the transparency - default is false, `chroma` - whether the user should be able to add the rgb/chroma effect to the color - default is false, `chromaSpeed` - whether the user should be able to change the chroma speed value of the color - default is `true`) <br>
 Compatible Type: `Integer` <br>
-Description: 
+Description: Allows the player to select a color from a hex color picker
 
 ### Dropdown Widget
 
 Annotation: `DropdownSetting` <br>
 Arguments: none <br>
 Compatible Types: any enum <br>
-Description: 
+Description: Displays an enum as a dropdown menu and lets the player choose an option
 
 ### Button Widget
 
 Annotation: `ButtonSetting` <br>
 Arguments: none <br>
-Compatible Types: any public method annotated with `@MethodOrder` and with a `Setting` object as the only parameter. <b>It's not supposed to return ConfigProperty</b><br>
-Description: 
+Compatible Types: any public void method annotated with `@MethodOrder` and with a `Setting` object as the only parameter.
+Description: Executes a method with custom code when clicked
 
 ### Activity Widget
 
 Annotation: `ActivitySetting` <br>
 Arguments: none <br>
-Compatible Types: any public method that returns an <a href="#FINAL_LINK_HERE">Activity</a>, <b>not ConfigProperty</b><br>
+Compatible Types: any public method that returns an [`Activity`](../activities/activity.md), <b>not `ConfigProperty`</b><br>
+Description: Opens an activity in a new window
+
+### Advanced Selection Widget
+
+Annotation: `AdvancedSelectionSetting` <br>
+Arguments: none <br>
+Compatible Types: any of the default types mentioned above
 Description: 
+
+### Tag Input Widget
+
+Annotation: `TagInputSetting` <br>
+Arguments: none <br>
+Compatible Types: `TagCollection`
+Description: Basically acts as an array of strings where the player can add and remove strings as he wishes
+
+### Item Stack Widget
+
+Annotation: `ItemStackSetting` <br>
+Arguments: none <br>
+Compatible Types: `ItemStack`, `ItemData`
+Description: Allows the player to select the item stack which they're holding ingame
+
+### File Chooser Widget
+
+Annotation: `FileChooserWidget` <br>
+Arguments: (`extensions`: an array of allowed file extensions) <br>
+Compatible Types: `Path`
+Description: Allows the player to select a path to a file or a directory
 
 ## Further Customize the Settings
 
