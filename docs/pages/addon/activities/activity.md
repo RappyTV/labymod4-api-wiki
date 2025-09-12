@@ -50,4 +50,4 @@ Looking back at what we just wrote, this is what the code and result would look 
     ```
 
 === ":octicons-file-media-24: Result"
-    ![Config-Result](/assets/files/screenshots/bare-activity-example.png)
+    ![Config-Result](../../../assets/files/screenshots/bare-activity-example.png)

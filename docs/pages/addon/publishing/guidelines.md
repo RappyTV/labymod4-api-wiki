@@ -11,12 +11,9 @@ Before you can submit an addon to our addon store, make sure you are following t
     3. Do not consume commands without providing a response.
 2. Respect the privacy of your users.
     1. Do not use the player's session identifier maliciously.
-    2. If creating a connection to a private server, do not store or send any information that is not specifically
-       required.
+    2. If creating a connection to a private server, do not store or send any information that is not specifically required.
 3. Only access the users' file system if necessary.
-4. Allow the user & servers to completely disable your addon at any time (
-   see <a href="/pages/addon/features/config/#create-a-basic-configuration" target="_blank">Create a Basic
-   Configuration</a>).
+4. Allow the user & servers to completely disable your addon at any time (see <a href="/pages/addon/features/config/#create-a-basic-configuration" target="_blank">Create a Basic Configuration</a>).
 5. Make sure your addon is compatible and remains so for the foreseeable future.
     1. Do not use deprecated methods and/or classes that already have a replacement.
     2. Do not use Reflection in any way. If you want to get access to a field or method that is private or protected,

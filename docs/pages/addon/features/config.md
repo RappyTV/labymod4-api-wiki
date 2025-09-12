@@ -236,7 +236,7 @@ These are some example files showing a few of the functions mentioned before.
     ```
 
 === ":octicons-file-media-24: Result"
-    ![Config-Result](/assets/files/screenshots/config-example.gif)
+    ![Config-Result](../../../assets/files/screenshots/config-example.gif)
 
 ## Config Versioning
 If you want to push an update for your addon which breaks existing configs it would be a great idea to write a little config migrator class which converts the old json file to your new config format.

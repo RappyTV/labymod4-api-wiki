@@ -94,7 +94,7 @@ public class ExampleHudWidget extends TextHudWidget<TextHudWidgetConfig> {
 
 You can also create Configurations for your Hud Widgets, in our example we are using a configuration for the TextHudWidget.
 You can easily create configurations by creating a class that inherit the `TextHudWidgetConfig` class.
-You can use the same Setting Elements that you are using to create the configuration of your addon, take a look <a href="/pages/addon/features/config/#using-predefined-setting-widgets">here</a>.
+You can use the same Setting Elements that you are using to create the configuration of your addon, take a look [here](config.md#using-predefined-setting-widgets).
 
 ```java
 

@@ -75,7 +75,7 @@ Like before, this is what the code we described above would look like:
     ```
 
 === ":octicons-file-media-24: Result"
-    ![Config-Result](/assets/files/screenshots/lss-activity-example.png)
+    ![Config-Result](../../../assets/files/screenshots/lss-activity-example.png)
  
 
 ## Injecting Blocks Into Other StyleSheets

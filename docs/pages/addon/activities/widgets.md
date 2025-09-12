@@ -2,7 +2,7 @@ Widgets are a valuable and easy way to customize your Activities and are the bac
 
 ## Use Widgets in Activities
 
-This part will show you how to use and integrate Widgets into your Activity. Looking back at our bare Activity example, we rendered the text `"I am a bare rendered example text"`, so we'll be using a ComponentWidget just this time with the text `"I am an example text rendered with a ComponentWidget"`. We're building onto the code from the previous example so if you haven't already gone through it, we recommend taking a look at it <a href="/pages/addon/activities/activity/">here</a>.
+This part will show you how to use and integrate Widgets into your Activity. Looking back at our bare Activity example, we rendered the text `"I am a bare rendered example text"`, so we'll be using a ComponentWidget just this time with the text `"I am an example text rendered with a ComponentWidget"`. We're building onto the code from the previous example so if you haven't already gone through it, we recommend taking a look at it [here](activity.md).
 
 ???+ warning "Important Note"
 
@@ -56,7 +56,7 @@ Like with the bare Activity, this is what the code we described above would look
     ```
 
 === ":octicons-file-media-24: Result"
-    ![Config-Result](/assets/files/screenshots/widget-activity-example.png)
+    ![Activity-Result](../../../assets/files/screenshots/widget-activity-example.png)
 
 ## All Widgets
 

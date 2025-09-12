@@ -225,7 +225,7 @@ For this example, we only need a simple class that does not contain any fields. 
     ```
 Now we need to fire the event so that all registered listeners can be notified. We will do this by hooking into the Minecraft code for each version and calling `Laby.fireEvent(new AdvancementReceiveEvent())` every time the player receives a new advancement.
 
-You can find more information about how to hook into Minecraft methods <a href="/pages/addon/features/version-dependent/#access-the-minecraft-code-via-mixin">here</a>.
+You can find more information about how to hook into Minecraft methods [here](version-dependent.md#access-the-minecraft-code-via-mixin).
 
 The last thing to do is to create our listener class called `AdvancementReceivedListener` which will listen for our `AdvancementReceiveEvent` and play a sound for the client every time the event is fired.
 The `AdvancementReceivedListener` needs a method annotated with `@Subscribe` and our `AdvancementReceiveEvent` class as parameters. In this method, we can simply call `Laby.labyAPI().minecraft().sounds().playButtonPress()` to play a sound for the client every time our event is fired.
