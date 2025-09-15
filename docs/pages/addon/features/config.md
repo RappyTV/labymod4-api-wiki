@@ -43,7 +43,7 @@ Description: Allows the player to enable or disable an on/off switch.
 Annotation: `SliderSetting` <br>
 Arguments: `min` - smallest value possible, `max` - biggest value possible, (`steps` - the amount of how much the value will increase/decrease on each move - default is 1) <br>
 Compatible Types: `Integer`, `Float`, `Double`, `Short`, `Byte`, `Long` <br>
-Description: Allows a player to select a number between a specific range on a slider
+Description: Allows the player to select a number in a specific range on a slider
 
 ### Text Field Widget
 
@@ -57,14 +57,14 @@ Description: Allows the player to freely type any string
 Annotation: `KeyBindSetting` <br>
 Arguments: (`acceptMouseButtons`: whether the user should be able to select mouse buttons - default is false) <br>
 Compatible Type: `Key` <br>
-Description: Allows the player to select a mouse or keyboard button
+Description: Allows the player to select a mouse or keyboard button. Most commonly used for shortcuts
 
 ### Multi Key Bind Widget
 
 Annotation: `MultiKeyBindSetting` <br>
 Arguments: none <br>
 Compatible Type: `Key[]` <br>
-Description: Allows the player to select multiple keyboard buttons
+Description: Allows the player to select multiple keyboard buttons. Most commonly used for shortcuts
 
 ### Color Picker Widget
 
@@ -99,7 +99,7 @@ Description: Opens an activity in a new window
 Annotation: `AdvancedSelectionSetting` <br>
 Arguments: none <br>
 Compatible Types: any of the default types mentioned above
-Description: 
+Description: A horizonal field list where the user can select one option. This is used for the theme selector for example.
 
 ### Tag Input Widget
 
