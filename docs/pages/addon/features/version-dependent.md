@@ -92,7 +92,8 @@ Those are the results from this example:
 
       @Override
       protected void enable() {
-        chatExecutor = ((DefaultReferenceStorage) this.referenceStorageAccessor()).exampleChatExecutor();
+        # Make sure to build your addon first (after creating the interface and it's implementations) and to import your own generated ReferenceStorage class
+        this.chatExecutor = ((ReferenceStorage) this.referenceStorageAccessor()).exampleChatExecutor();
 
         this.registerCommand(new ExamplePingCommand(this));
       }
@@ -103,7 +104,7 @@ Those are the results from this example:
       }
 
       public ExampleChatExecutor chatExecutor() {
-        return chatExecutor;
+        return this.chatExecutor;
       }
     ```
 
@@ -115,7 +116,7 @@ Those are the results from this example:
 
       public ExamplePingCommand(ExampleAddon addon) {
         super("ping", "pong");
-        chatExecutor = addon.chatExecutor();
+        this.chatExecutor = addon.chatExecutor();
       }
 
       @Override
@@ -125,7 +126,7 @@ Those are the results from this example:
           return false;
         }
 
-        chatExecutor.displayMessageInChat(Component.text("Pong!", NamedTextColor.GOLD));
+        this.chatExecutor.displayMessageInChat(Component.text("Pong!", NamedTextColor.GOLD));
         return true;
       }
     }
@@ -133,12 +134,42 @@ Those are the results from this example:
 
 ## Access the Minecraft Code via Mixin
 
-???+ warning "Important Note"
+!!! warning "Important Note"
+    The moment your addon uses Mixins, it requires a full game restart when downloaded via the addon store.
 
-    Please keep in mind that the moment your addon uses Mixins, it requires a restart when downloaded via the addon store.
+!!! danger
+    For mixins to work outside of the development environment, your `rootProject.name` in `settings.gradle.kts` must exactly match your addon namespace.
 
-todo: write
+Mixins allow you to modify Minecraft code directly. Similar to reference storage, they are version-dependent, which means you must implement them separately for each Minecraft version you want to support.
 
-## Inheriting Version Dependent Code
+When creating a mixin, the **location** is critical. Navigate to the `game-runner` module of your addon and create a package named `mixins` inside the automatically generated versioned package. Your structure should look something like this:
 
-todo: write
+```
+org/example/{version}/mixins
+```
+
+You may create mixins in this package or in subpackages. You do **not** need to register them manually in a configuration file - LabyMod will automatically detect and apply them. LabyMod also supports [MixinExtras](https://github.com/LlamaLad7/MixinExtras) annotations, which can simplify common injection patterns.
+
+For further reading:
+
+* [SpongePowered Mixin Documentation](https://github.com/SpongePowered/Mixin/wiki)
+* [MixinExtras Wiki](https://github.com/LlamaLad7/MixinExtras/wiki)
+
+This section does not attempt to explain all of Mixin in detail - it focuses only on how to correctly load and use them with LabyMod.
+
+### Example: Logging Every Tick
+
+=== ":octicons-file-code-16: org.example.v1_21_5.mixins.MixinMinecraft"
+    ```java
+    @Mixin(Minecraft.class)
+    public class MixinMinecraft {
+
+      @Unique
+      private int example$tickCount = 0;
+
+      @Inject(method = "tick", at = @At("HEAD"))
+      private void onTick(CallbackInfo ci) {
+          System.out.println("[Mixin] Tick log " + this.example$tickCount++);
+      }
+    }
+    ```
