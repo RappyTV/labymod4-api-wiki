@@ -27,7 +27,7 @@ The current valid types are:
  + Key
  + MouseButton
  + ResourceLocation
- + Color (net.labymod.api.util)
+ + Color (`net.labymod.api.util`)
 
 ## Using Predefined Setting Widgets
 
@@ -55,7 +55,7 @@ Description: Allows the player to freely type any string
 ### Key Bind Widget
 
 Annotation: `KeyBindSetting` <br>
-Arguments: (`acceptMouseButtons`: whether the user should be able to select mouse buttons - default is false) <br>
+Arguments: (`acceptMouseButtons` - whether the user should be able to select mouse buttons - default is false) <br>
 Compatible Type: `Key` <br>
 Description: Allows the player to select a mouse or keyboard button. Most commonly used for shortcuts
 
@@ -84,42 +84,42 @@ Description: Displays an enum as a dropdown menu and lets the player choose an o
 
 Annotation: `ButtonSetting` <br>
 Arguments: none <br>
-Compatible Types: any public void method annotated with `@MethodOrder` and with a `Setting` object as the only parameter.
+Compatible Types: any public void method annotated with `@MethodOrder` and with a `Setting` object as the only parameter. <br>
 Description: Executes a method with custom code when clicked
 
 ### Activity Widget
 
 Annotation: `ActivitySetting` <br>
 Arguments: none <br>
-Compatible Types: any public method that returns an [`Activity`](../activities/activity.md), <b>not `ConfigProperty`</b><br>
+Compatible Types: any public method that returns an [`Activity`](../activities/activity.md), <b>not `ConfigProperty`</b> <br>
 Description: Opens an activity in a new window
 
 ### Advanced Selection Widget
 
 Annotation: `AdvancedSelectionSetting` <br>
 Arguments: none <br>
-Compatible Types: any of the default types mentioned above
+Compatible Types: any of the default types mentioned above <br>
 Description: A horizonal field list where the user can select one option. This is used for the theme selector for example.
 
 ### Tag Input Widget
 
 Annotation: `TagInputSetting` <br>
 Arguments: none <br>
-Compatible Types: `TagCollection`
+Compatible Types: `TagCollection` <br>
 Description: Basically acts as an array of strings where the player can add and remove strings as he wishes
 
 ### Item Stack Widget
 
 Annotation: `ItemStackSetting` <br>
 Arguments: none <br>
-Compatible Types: `ItemStack`, `ItemData`
+Compatible Types: `ItemStack`, `ItemData` <br>
 Description: Allows the player to select the item stack which they're holding ingame
 
 ### File Chooser Widget
 
 Annotation: `FileChooserWidget` <br>
 Arguments: (`extensions`: an array of allowed file extensions) <br>
-Compatible Types: `Path`
+Compatible Types: `Path` <br>
 Description: Allows the player to select a path to a file or a directory
 
 ## Further Customize the Settings
@@ -146,7 +146,7 @@ To display icons in front of your settings, you'll need to declare a sprite text
 These are some example files showing a few of the functions mentioned before.
 
 === ":octicons-file-code-16: ExampleConfiguration"
-    ``` java
+    ```java
     @ConfigName("settings")
     @SpriteTexture("example_sprite.png")
     public class ExampleConfiguration extends AddonConfig {
@@ -187,7 +187,7 @@ These are some example files showing a few of the functions mentioned before.
     ```
 
 === ":octicons-file-code-16: ExampleSubSetting"
-    ``` java
+    ```java
     public class ExampleSubSettings extends Config {
     
       @ShowSettingInParent
@@ -207,14 +207,14 @@ These are some example files showing a few of the functions mentioned before.
     ```
 
 === ":octicons-file-code-16: ExampleEnum"
-    ``` java
+    ```java
     public enum ExampleEnum {
         HEART, CIRCLE, RECTANGLE, TRIANGLE, SCALENE_TRIANGLE;
     }
     ```
 
 === ":octicons-file-code-16: en_us.json"
-    ``` json
+    ```json
     {
       "example": {
         "settings": {
@@ -263,6 +263,74 @@ These are some example files showing a few of the functions mentioned before.
 
 === ":octicons-file-media-24: Result"
     ![Config-Result](../../../assets/files/screenshots/config-example.gif)
+
+## Mark config options as introduced in a specific update
+
+Sometimes you add a new setting to your config and want to highlight it to your users as part of an update.
+To achieve this, LabyMod provides **revisions**. A revision acts like a milestone: it documents an update with a version and associates it with a release date. Config options can then be annotated with this revision to automatically display a **“new” badge** for a limited time.
+
+### Create and register a revision
+
+Let’s say you’re releasing an update for your addon with the version `1.0.1`.
+Before your configuration is loaded, you need to register a revision so it can be used in your config.
+
+1. Override the `preConfigurationLoad` method in your `LabyAddon` class.
+2. Inside it, register a new revision via the `RevisionRegistry`, accessible through `Laby.references().revisionRegistry()`.
+3. Use a `SimpleRevision` object to register:
+    * **Namespace:** your addon namespace (`"example"` in this guide).
+    * **Version:** a `SemanticVersion` object, e.g. `new SemanticVersion("1.0.1")`.
+    * **Date:** release date in `YYYY-MM-DD` format. This controls how long the “new” badge is displayed (exactly 12 days).
+
+### Associate a setting with a revision
+
+Once a revision is registered, you can immediately use it in your config.
+To do this, annotate a config option with the `@IntroducedIn` annotation.
+
+* The `namespace` parameter should match the namespace you registered.
+* The `value` parameter should match the revision’s version string.
+
+And that’s it - LabyMod will now automatically mark this setting as **new** for your users.
+
+### Example of applying a revision
+
+=== ":octicons-file-code-16: ExampleAddon"
+    ```java
+    public class ExampleAddon extends LabyAddon<ExampleConfiguration> {
+
+      @Override
+      protected void preConfigurationLoad() {
+        Laby.references().revisionRegistry().register(new SimpleRevision(
+          "example",
+          new SemanticVersion("1.0.1"),
+          "2025-10-06"
+        ));
+      }
+    }
+    ```
+
+=== ":octicons-file-code-16: ExampleConfiguration"
+    ```java
+    @ConfigName("settings")
+    public class ExampleConfiguration extends AddonConfig {
+
+      @SwitchSetting
+      private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
+
+      @TextFieldSetting
+      private final ConfigProperty<String> oldConfigOption = new ConfigProperty<>("");
+
+      @IntroducedIn(namespace = "example", value = "1.0.1")
+      @SliderSetting(min = 1, max = 10)
+      private final ConfigProperty<Integer> brandNewConfigOption = new ConfigProperty<>(7);
+
+      public ConfigProperty<Boolean> enabled() {
+          return this.enabled;
+      }
+    }
+    ```
+
+=== ":octicons-file-media-24: Result"
+    ![Config-Result](../../../assets/files/screenshots/config-revision.gif)
 
 ## Config Versioning
 If you want to push an update for your addon which breaks existing configs it would be a great idea to write a little config migrator class which converts the old JSON file to your new config format.
