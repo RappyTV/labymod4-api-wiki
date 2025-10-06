@@ -117,7 +117,7 @@ Description: Allows the player to select the item stack which they're holding in
 
 ### File Chooser Widget
 
-Annotation: `FileChooserWidget` <br>
+Annotation: `FileChooserSetting` <br>
 Arguments: (`extensions`: an array of allowed file extensions) <br>
 Compatible Types: `Path` <br>
 Description: Allows the player to select a path to a file or a directory
